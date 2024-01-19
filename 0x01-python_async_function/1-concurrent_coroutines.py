@@ -2,8 +2,8 @@
 '''
 allows us to run multiple asynchronous tasks concurrently, in parallel
 '''
-from typing import List
 import asyncio
+from typing import List
 import random
 
 wait_random = __import__('0-basic_async_syntax').wait_random
