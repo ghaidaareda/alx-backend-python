@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 measures the total execution time
-execute async_comprehension four times in parallel 
+execute async_comprehension four times in parallel
 using asyncio.gather
 """
 import time
