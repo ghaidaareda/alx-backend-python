@@ -19,5 +19,4 @@ async def async_comprehension() -> List[float]:
     regular comprehensions but includes the async keyword.
     """
     async_gen_instance = async_generator()
-    values = [value async for value in async_gen_instance]
-    return values
+    return [value async for value in async_gen_instance]
