@@ -2,6 +2,8 @@
 """
 first unit test for utils.access_nested_map.
 """
+from multiprocessing import context
+from typing import Dict, Tuple
 import unittest
 from parameterized import parameterized 
 from utils import access_nested_map
@@ -20,10 +22,14 @@ class TestAccessNestedMap(unittest.TestCase):
         actual_result = access_nested_map(nested_map, path)
         self.assertEqual(actual_result, expected_result)
         
-    def  test_access_nested_map_exception(self, nested_map, path, expected_result):
-        with self.assertRaises(KeyError)
+    def  test_access_nested_map_exception(self,
+            nested_map: Dict,
+            path: Tuple[str],
+            exception: Exception,
+            ) -> None:
+        with self.assertRaises(KeyError):
             access_nested_map(nested_map, path)
-            
+        
 
 if __name__ == "__main__":
     unittest.main()
