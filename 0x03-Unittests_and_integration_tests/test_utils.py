@@ -7,7 +7,7 @@ from typing import Dict, Tuple
 import unittest
 from unittest.mock import Mock, patch
 from parameterized import parameterized 
-from utils import access_nested_map, get_json
+from utils import access_nested_map, get_json, memoize
 
 class TestAccessNestedMap(unittest.TestCase):
     """
@@ -27,12 +27,7 @@ class TestAccessNestedMap(unittest.TestCase):
         ({}, ("a",), KeyError),
         ({"a": 1}, ("a", "b"), KeyError),
     ])
-    def test_access_nested_map_exception(
-            self,
-            nested_map: Dict,
-            path: Tuple[str],
-            exception: Exception,
-    ) -> None:
+    def test_access_nested_map_exception(self, nested_map, path, exception):
         """Tests exception raising."""
         with self.assertRaises(exception):
             access_nested_map(nested_map, path)
@@ -45,12 +40,33 @@ class TestGetJson(unittest.TestCase):
         ("http://holberton.io", {"payload": False})
     ])
     def test_get_json(self, test_url, test_payload):
-        """ Mock HTTP calls
-        """
+        """ Mock HTTP """
         with patch('requests.get') as mock_request:
             mock_request.return_value.json.return_value = test_payload
             self.assertEqual(get_json(url=test_url), test_payload)
 
+class TestMemoize(unittest.TestCase):
+    """ Test Class memoize """
+
+    def test_memoize(self):
+        """ Test memoize """
+        class TestClass:
+            """ Test Class """
+
+            def a_method(self):
+                """ a_method """
+                return 42
+
+            @memoize
+            def a_property(self):
+                """ a-Decorator """
+                return self.a_method()
+
+        with patch.object(TestClass, 'a_method') as mock:
+            test_class = TestClass()
+            test_class.a_property()
+            test_class.a_property()
+            mock.assert_called_once()
 if __name__ == "__main__":
     unittest.main()
         
