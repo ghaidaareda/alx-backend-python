@@ -44,8 +44,8 @@ class TestAccessNestedMap(unittest.TestCase):
     ])
     def test_get_json(
             self,
-            test_url,
-            test_payload,
+            test_url: str,
+            test_payload: Dict,
     ) -> None:
         """Tests `get_json`'s output."""
         attrs = {'json.return_value': test_payload}
