@@ -2,9 +2,8 @@
 """
 first unit test for utils.access_nested_map.
 """
-from logging import exception
 from multiprocessing import context
-from typing import Dict, Mapping, Sequence, Tuple
+from typing import Dict, Tuple
 import unittest
 from unittest.mock import Mock, patch
 from parameterized import parameterized
@@ -29,8 +28,7 @@ class TestAccessNestedMap(unittest.TestCase):
         ({}, ("a",), KeyError),
         ({"a": 1}, ("a", "b"), KeyError),
     ])
-    def test_access_nested_map_exception(self, nested_map: Mapping,
-                               path: Sequence, expected: int) -> None:
+    def test_access_nested_map_exception(self, nested_map, path, exception):
         """Tests exception raising."""
         with self.assertRaises(exception):
             access_nested_map(nested_map, path)
