@@ -32,7 +32,7 @@ class TestAccessNestedMap(unittest.TestCase):
             exception: Exception,
             ) -> None:
         with self.assertRaises(exception):
-            access_nested_map(nested_map, path)
+            self.access_nested_map(nested_map, path)
         
 
 if __name__ == "__main__":
